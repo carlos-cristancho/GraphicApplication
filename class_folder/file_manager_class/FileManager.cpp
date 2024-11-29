@@ -1,15 +1,15 @@
-#include "FileManager.h" // Incluir la cabecera correspondiente
-#include <fstream>       // Para manejar archivos
-#include <iostream>      // Para mostrar mensajes de error
-#include <sstream>       // Para convertir datos si es necesario
+#include "FileManager.h" // Include the corresponding header
+#include <fstream>       // To manage files
+#include <iostream>      // To display error messages
+#include <sstream>       // To convert data if necessary
 
 FileManager::FileManager(const std::string& file) : filename(file) {}
 
-// Implementación del método saveData
+// Implementation of the saveData method
 void FileManager::saveData(const std::vector<double>& time, const std::vector<double>& values) const {
-    std::ofstream file(filename); // Abrir el archivo en modo escritura
+    std::ofstream file(filename); // Open the file in write mode
     if (file.is_open()) {
-        file << "Index\tTime\tValue\n"; // Cabecera del archivo
+        file << "Index\tTime\tValue\n"; // File header
         for (size_t i = 0; i < time.size(); i++) {
             file << i + 1 << "\t" << time[i] << "\t" << values[i] << "\n";
         }
@@ -21,15 +21,15 @@ void FileManager::saveData(const std::vector<double>& time, const std::vector<do
     }
 }
 
-// Implementación del método readData
+// Implementation of the readData method
 std::vector<std::pair<double, double>> FileManager::readData() const {
-    std::ifstream file(filename); // Abrir el archivo en modo lectura
+    std::ifstream file(filename); // Open the file in read mode
     std::vector<std::pair<double, double>> data;
 
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
-            if (line.empty() || line[0] == '#') continue; // Ignorar líneas vacías o comentarios
+            if (line.empty() || line[0] == '#') continue; // Ignore empty lines or comments
             std::istringstream ss(line);
             double time, value;
             ss >> time >> value;

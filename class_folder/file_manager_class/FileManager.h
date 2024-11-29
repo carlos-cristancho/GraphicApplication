@@ -1,4 +1,4 @@
-#ifndef FILEMANAGER_H // Guardas de inclusión
+#ifndef FILEMANAGER_H // Inclusion guards
 #define FILEMANAGER_H
 
 #include <string>
@@ -6,13 +6,13 @@
 
 class FileManager {
 private:
-    std::string filename; // Nombre del archivo a gestionar
+    std::string filename; // Name of the file to manage
 
 public:
     // Constructor
     explicit FileManager(const std::string& file);
 
-    // Métodos públicos
+    // Public methods
     void saveData(const std::vector<double>& time, const std::vector<double>& values) const;
     std::vector<std::pair<double, double>> readData() const;
 };

@@ -1,24 +1,24 @@
-#include "class_folder/application_class/Application.h" // Incluir la clase Application
-#include <iostream> // Para manejar errores y salida estándar
+#include "class_folder/application_class/Application.h" // Include the Application class
+#include <iostream> // For error handling and standard output
 
 int main() {
     try {
-        // Crear instancia de la aplicación
+        // Create application instance
         Application app;
 
-        // Ejecutar la aplicación
+        // Running the application
         app.run();
 
-        return 0; // Salida exitosa
+        return 0; // Successful exit
     }
     catch (const std::exception& e) {
-        // Capturar errores estándar
+        // Capture standard errors
         std::cerr << "Error: " << e.what() << std::endl;
-        return 1; // Código de error
+        return 1; // Error code
     }
     catch (...) {
-        // Capturar cualquier error inesperado
-        std::cerr << "Se produjo un error desconocido." << std::endl;
-        return 1; // Código de error
+        // Capture any unexpected errors
+        std::cerr << "An unknown error occurred." << std::endl;
+        return 1; // Error code
     }
 }

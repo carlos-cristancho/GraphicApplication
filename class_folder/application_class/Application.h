@@ -7,7 +7,7 @@
 
 class Application {
 public:
-    // Método para ejecutar la lógica principal de la aplicación
+    // Method for executing the main application logic
     void run();
 };
 

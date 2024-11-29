@@ -5,13 +5,13 @@
 
 class ScriptExecutor {
 private:
-    std::string scriptPath; // Ruta al script Python
+    std::string scriptPath; // Path to Python script
 
 public:
     // Constructor
     explicit ScriptExecutor(const std::string& path);
 
-    // Método para ejecutar el script
+    // Method to execute the script
     void execute(int n, double frequency, double samplingRate) const;
 };
 
