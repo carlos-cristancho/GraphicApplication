@@ -27,7 +27,7 @@ plt.ylabel("Amplitude (mm)")
 plt.grid()  # Add a grid for better visualisation
 
 # Set x-axis limits to show only two cycles
-plt.xlim(0, max(t)*1.01)  # Show two cycles of the signal
+plt.xlim(0, max(t))  # Show two cycles of the signal
 
 # Set the y-axis limits so that the x-axis cuts at y=0.
 y_min, y_max = min(y), max(y)  # Calculate data limits

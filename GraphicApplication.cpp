@@ -3,13 +3,14 @@
 #include <fstream>
 #include <cmath> // For sin() and M_PI
 #include <string>
+#include <vector>
 
 int main() {
     // Parameters for the sine wave
     const int n = 1 << 12;             // Number of samples
     const double pi = 3.14159265358979323846;
     const double amplitude = 1.0;  // Amplitude of the sine wave
-    const double frequency = 2;  // Frequency in Hz (cycles per sample)
+    const double frequency = 200;  // Frequency in Hz (cycles per sample)
     const double phase = 0.0;      // Phase in radians
     const double samplingRate = pow(2, 0); // Sampling rate (samples per unit time)
     double in[n] = { 0.0 };
