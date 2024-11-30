@@ -6,6 +6,7 @@ void Application::run() {
     double frequency = 1.0;
     double phase = 0.0;
     int n = 1 << 12; // 4096 samples
+    int cycles = 1;
 
     // Create the signal
     Signal signal(amplitude, frequency, phase, n);
@@ -17,5 +18,5 @@ void Application::run() {
 
     // Execute the Python script
     ScriptExecutor scriptExecutor("../scripts/graphic.py");
-    scriptExecutor.execute(n, amplitude, frequency);
+    scriptExecutor.execute(n, cycles, amplitude, frequency, phase);
 }

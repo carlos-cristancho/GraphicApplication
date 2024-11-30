@@ -1,58 +1,33 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import sys
-
+from file_loader import FileLoader
+from signal_extender import SignalExtender
+from signal_plotter import SignalPlotter
 
 class SignalProcessor:
-    """Class for processing and plotting signals."""
-
-    def __init__(self, file_path, n, amplitude, frequency):
-        # Initialize with the path to the data file and parameters from C++
+    def __init__(self, file_path, samples, cycles, amplitude, frequency, phase):
         self.file_path = file_path
-        self.n = n
+        self.samples = samples
+        self.cycles = cycles
         self.amplitude = amplitude
         self.frequency = frequency
+        self.phase = phase
         self.time = None
         self.values = None
 
-    def load_data(self):
-        # Load data from the file
-        try:
-            data = np.loadtxt(self.file_path, skiprows=1)  # Skip header row
-            self.time = data[:, 1]  # Extract time column
-            self.values = data[:, 2]  # Extract values column
-            print(f"\nData successfully loaded from: {self.file_path}")
-        except Exception as e:
-            print(f"\nError loading file: {e}")
-            sys.exit(1)
+    def process_signal(self):
+        """
+        Process the signal: load data, extend cycles, and prepare for plotting.
+        """
+        # Load data from file "C:\Users\CODER\_CPP\GraphicApplication\Debug\graph_data.txt"
+        loader = FileLoader(self.file_path)
+        self.time, self.values = loader.load_data()
+
+        # Extend cycles
+        extender = SignalExtender()
+        self.time, self.values = extender.extend_cycles(self.time, self.values, self.cycles)
 
     def plot_signal(self):
-        # Plot the signal using the loaded data
-        if self.time is None or self.values is None:
-            print("\nError: No data has been loaded.")
-            return
-
-        plt.figure(figsize=(12, 6))
-        plt.plot(self.time, self.values, color='red', linewidth=1.5, label="Input Signal")
-        plt.axhline(0, color='black', linewidth=1, linestyle='-')  # Add horizontal axis
-        plt.title("Input Signal")
-        plt.xlabel("Time (s)")
-        plt.ylabel("Amplitude (mm)")
-        plt.grid()
-
-        # Adjust x-axis to show full signal
-        plt.xlim(0, max(self.time))
-
-        # Adjust y-axis with a margin for clarity
-        y_min, y_max = min(self.values), max(self.values)
-        plt.ylim([y_min * 1.1, y_max * 1.1])
-
-        # Add text annotation with received parameters
-        text = (f"Samples: {self.n}\n"
-                f"Amplitude: {self.amplitude} mm\n"
-                f"Frequency: {self.frequency} Hz\n"
-                f"Signal period: {1/self.frequency} s")
-        plt.text(0.01 * max(self.time), y_max * 0.83, text, fontsize=10, color='blue')
-
-        plt.tight_layout()
-        plt.show()
+        """
+        Plot the processed signal.
+        """
+        plotter = SignalPlotter(self.time, self.values, self.samples, self.cycles, self.amplitude, self.frequency, self.phase)
+        plotter.plot_signal()
