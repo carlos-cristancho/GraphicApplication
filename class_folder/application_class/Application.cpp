@@ -3,13 +3,12 @@
 void Application::run() {
     // Configuration parameters
     double amplitude = 1.0;
-    double frequency = 2.0;
+    double frequency = 1.0;
     double phase = 0.0;
-    double samplingRate = 1.0;
     int n = 1 << 12; // 4096 samples
 
     // Create the signal
-    Signal signal(amplitude, frequency, phase, samplingRate, n);
+    Signal signal(amplitude, frequency, phase, n);
     signal.generate();
 
     // Saving the signal to a file
@@ -18,5 +17,5 @@ void Application::run() {
 
     // Execute the Python script
     ScriptExecutor scriptExecutor("../scripts/graphic.py");
-    scriptExecutor.execute(n, frequency, samplingRate);
+    scriptExecutor.execute(n, amplitude, frequency);
 }

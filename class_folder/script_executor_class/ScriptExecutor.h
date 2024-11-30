@@ -12,7 +12,7 @@ public:
     explicit ScriptExecutor(const std::string& path);
 
     // Method to execute the script
-    void execute(int n, double frequency, double samplingRate) const;
+    void execute(int n, double amplitude, double frequency) const;
 };
 
 #endif // SCRIPTEXECUTOR_H

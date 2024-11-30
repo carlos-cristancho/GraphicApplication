@@ -2,12 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
+
 class SignalProcessor:
     """Class for processing and plotting signals."""
 
-    def __init__(self, file_path):
-        # Initialize with the path to the data file
+    def __init__(self, file_path, n, amplitude, frequency):
+        # Initialize with the path to the data file and parameters from C++
         self.file_path = file_path
+        self.n = n
+        self.amplitude = amplitude
+        self.frequency = frequency
         self.time = None
         self.values = None
 
@@ -42,6 +46,13 @@ class SignalProcessor:
         # Adjust y-axis with a margin for clarity
         y_min, y_max = min(self.values), max(self.values)
         plt.ylim([y_min * 1.1, y_max * 1.1])
+
+        # Add text annotation with received parameters
+        text = (f"Samples: {self.n}\n"
+                f"Amplitude: {self.amplitude} mm\n"
+                f"Frequency: {self.frequency} Hz\n"
+                f"Signal period: {1/self.frequency} s")
+        plt.text(0.01 * max(self.time), y_max * 0.83, text, fontsize=10, color='blue')
 
         plt.tight_layout()
         plt.show()

@@ -1,8 +1,8 @@
 #include "Signal.h"
 #include <cmath>
 
-Signal::Signal(double amp, double freq, double ph, double rate, int samples)
-    : amplitude(amp), frequency(freq), phase(ph), samplingRate(rate), n(samples) {
+Signal::Signal(double amp, double freq, double ph, int samples)
+    : amplitude(amp), frequency(freq), phase(ph), n(samples) {
 }
 
 void Signal::generate() {
